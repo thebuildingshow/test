@@ -1,0 +1,247 @@
+@import "mixins";
+
+// BASE
+// ----
+* { @include border-box; }
+
+@mixin selection { background: $foreground; color: $background; text-shadow: none; }
+::-moz-selection { @include selection; }
+::selection { @include selection; }
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: $unit;
+
+  background: $background;
+  color: $middle;
+  font-family: $sans;
+  font-size: $font-size;
+  font-style: normal;
+  font-weight: 500;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  // INVERTED SCHEMES
+  // ----------------
+  &.inverse {
+    background: $foreground;
+
+    .frame {
+      background: $foreground;
+
+      .inner-frame { background: $background; }
+    }
+
+    .contents:after {
+      border-color: $foreground transparent;
+    }
+
+    .inner-frame {
+      background: $background;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $middle;
+  font-weight: 900;
+}
+
+object,
+embed,
+iframe,
+img {
+  margin: 0;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+blockquote {
+  margin-left: 0;
+  padding-left: $unit;
+  border-left: $unit/4 solid;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// STRUCTURE
+// ---------
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: $unit/2;
+  margin-top: $unit/4;
+  @include loading($foreground);
+  z-index: 90;
+  display: none;
+}
+
+.frame {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  overflow-y: scroll;
+  background: $background;
+
+  .inner-frame { background: $foreground; }
+}
+
+// CHANNEL
+// -------
+.wrapper {
+  margin: $unit;
+}
+
+.header {
+  text-align: center;
+  font-size: 1.1428em;
+  line-height: 1.25em;
+  margin: $unit 0;
+}
+
+.contents {
+  position:relative;
+  border: $unit/4 solid $middle;
+  margin: $unit/4;
+  padding: $unit;
+  height: 100%;
+  @include border-radius(3px);
+
+  &:before {
+    content: "";
+    position: absolute;
+    display: block; 
+    width: 0;
+    top: -$unit;
+    left: 50%;
+    border-style: solid;
+    border-color: $middle transparent;
+    border-width: 0 $unit $unit;
+    margin-left: -$unit;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    display: block; 
+    width: 0;
+    top: -13px;
+    left: 50%;
+    border-style: solid;
+    border-color: $background transparent;
+    border-width: 0 13px 13px;
+    margin-left: -13px;
+  }
+
+  &.active { border-color: $yellow; }
+  
+  &.active:before { border-color: $yellow transparent; }
+}
+
+.object {
+  display: inline-block;
+  margin: $unit/4;
+  vertical-align: bottom;
+  position: relative;
+  @include border-radius(3px);
+  @include transition(border-color 0.125s);
+}
+
+.block {
+  border: $unit/4 solid transparent;
+  cursor: pointer;
+
+  &:hover { border-color: $blue; }
+}
+
+.channel {
+  display: inline-block;
+  padding: $unit;
+  border: $unit/4 solid transparent;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1428em;
+  line-height: 1.25em;
+
+  &:hover {
+    border-color: $yellow;
+  }
+}
+
+.functions {
+  position: fixed;
+  top: $unit*2;
+  right: $unit*2;
+  z-index: 1;
+}
+
+.title,
+.attachment-download {
+  font-weight: bold;
+  margin: $unit 0;
+}
+
+.description {
+  margin: $unit 0;
+  @include serif-type;
+}
+
+.inner-frame {
+  width: 100%;
+  min-height: 40px + ($unit*2);
+  padding: $unit;
+  text-align: center;
+  background: $foreground;
+  position: relative;
+
+  a {
+    display: inline-block;
+    position: relative;
+
+    img {
+      display: inline-block;
+    }
+
+    b.image-outline {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+    }
+  }
+}
+
+.text {
+  @include serif-type;
+  padding-right: $unit;
+  padding-left: $unit;
+}
+
+.attachment {
+  padding: $unit/2 $unit;
+  font-weight: bold;
+}
+
+// UTIL
+// ----
+.align-center { text-align: center; }

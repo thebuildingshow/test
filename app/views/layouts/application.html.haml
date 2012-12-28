@@ -1,0 +1,13 @@
+!!! 5
+%html{ lang: "en" }
+  %head
+    %title= yield_content :title
+    = meta_tag DEFAULT_CHANNEL_IDENTIFIER, name: "source"
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+
+  %body{ class: color_scheme }
+    #loading.loading
+      
+    #main
+      = yield

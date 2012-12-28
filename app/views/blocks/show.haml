@@ -1,0 +1,32 @@
+- content_for :title do
+  = @block.generated_title
+
+.functions
+  = link_to '', '/', class: 'return interface-lrg-return'
+
+.wrapper
+
+  .inner-frame{ class: @block._class.downcase }
+
+    - if @block.has_image?
+      = link_to appropriate_link(@block), target: '_blank' do
+      
+        = image_tag image_proxy_path(@block.image.original.url)
+        %b.image-outline
+
+    - if @block.has_attachment?
+      .attachment-download
+
+        = link_to "Download #{@block.attachment.file_name} (#{@block.attachment.file_size_display} .#{@block.attachment.extension})", @block.attachment.url
+
+    - if is_text?(@block)
+      = @block.content_html
+
+  - if display_metadata?(@block)
+    .metadata
+
+      - if @block.title
+        .title= @block.title
+
+      - if @block.description
+        .description= @block.description_html

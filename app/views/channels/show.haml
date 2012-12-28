@@ -1,0 +1,19 @@
+- content_for :title do
+  = @channel.title
+
+.wrapper{ id: @channel.slug }
+
+  .header
+    = link_to @channel.title, encoded_url(@channel)
+
+  .contents.active
+    - @channel.contents.each do |block|
+      
+      - if is_channel?(block)  
+        - channel = block
+        .channel.object{ data: { href: encoded_url(channel), slug: channel.slug } }
+          = channel.title
+      
+      - else
+        .block.object{ class: block._class.downcase, data: { href: encoded_url(block) } }
+          = appropriate_preview(block)
