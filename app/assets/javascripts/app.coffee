@@ -42,10 +42,14 @@ class App.Mediator
 
 class App.Shortcuts extends Backbone.Shortcuts
   shortcuts:
-    "esc" : "return"
+    "esc": "return"
+    "i": "invert"
   
   return: ->
     App.mediator.trigger 'block:return'
+
+  invert: ->
+    $('body').toggleClass('inverse')
 
 
 class App.Models.Object extends Backbone.Model
