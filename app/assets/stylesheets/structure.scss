@@ -1,0 +1,138 @@
+@import "mixins";
+
+// STRUCTURE
+// ---------
+.frame {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  overflow-y: scroll;
+}
+
+.wrapper {
+  margin: $unit;
+}
+
+.header {
+  text-align: center;
+  font-size: 1.1428em;
+  line-height: 1.25em;
+  margin: $unit 0;
+}
+
+.contents {
+  position:relative;
+  border-width: $unit/4;
+  border-style: solid;
+  margin: $unit/4;
+  padding: $unit;
+  height: 100%;
+  @include border-radius(3px);
+
+  &:before {
+    content: "";
+    position: absolute;
+    display: block; 
+    width: 0;
+    top: -$unit;
+    left: 50%;
+    border-style: solid;
+    border-width: 0 $unit $unit;
+    margin-left: -$unit;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    display: block; 
+    width: 0;
+    top: -13px;
+    left: 50%;
+    border-style: solid;
+    border-width: 0 13px 13px;
+    margin-left: -13px;
+  }
+}
+
+.object {
+  display: inline-block;
+  margin: $unit/4;
+  vertical-align: bottom;
+  position: relative;
+  @include border-radius(3px);
+  @include transition(border-color 0.125s);
+}
+
+.block {
+  border-width: $unit/4;
+  border-style: solid;
+  cursor: pointer;
+}
+
+.channel {
+  display: inline-block;
+  padding: $unit;
+  border-width: $unit/4;
+  border-style: solid;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1428em;
+  line-height: 1.25em;
+}
+
+.functions {
+  position: fixed;
+  top: $unit*2;
+  right: $unit*2;
+  z-index: 1;
+}
+
+.title,
+.attachment-download {
+  font-weight: bold;
+  margin: $unit 0;
+}
+
+.description {
+  margin: $unit 0;
+  @include serif-type;
+}
+
+.inner-frame {
+  width: 100%;
+  min-height: 40px + ($unit*2);
+  padding: $unit;
+  text-align: center;
+  position: relative;
+
+  a {
+    display: inline-block;
+    position: relative;
+
+    img { display: inline-block; }
+
+    b.image-outline {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px solid rgba(255, 255, 255, 0.125);
+    }
+  }
+}
+
+.text {
+  @include serif-type;
+  padding-right: $unit;
+  padding-left: $unit;
+}
+
+.attachment {
+  padding: $unit/2 $unit;
+  font-weight: bold;
+}

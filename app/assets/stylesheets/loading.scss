@@ -1,0 +1,49 @@
+@import "mixins";
+
+// LOADING INDICATOR
+// -----------------
+@mixin loading($color: #000, $angle: -45deg) {
+  @include striped($color, $angle);
+  background-repeat: repeat;
+  @include background-size(40px 40px);
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+     -moz-animation: progress-bar-stripes 2s linear infinite;
+          animation: progress-bar-stripes 2s linear infinite;
+}
+
+@mixin striped($color, $angle: -45deg) {
+  background-color: $color !important;
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255,255,255,1)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255,255,255,1)), color-stop(.75, rgba(255,255,255,1)), color-stop(.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
+  background-image: -ms-linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
+  background-image: linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
+}
+
+@-webkit-keyframes progress-bar-stripes {
+  from  { background-position: 0 0; }
+  to    { background-position: 40px 0; }
+}
+
+@-moz-keyframes progress-bar-stripes {
+  from  { background-position: 0 0; }
+  to    { background-position: 40px 0; }
+}
+
+@keyframes progress-bar-stripes {
+  from  { background-position: 0 0; }
+  to    { background-position: 40px 0; }
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: $unit/2;
+  margin-top: $unit/4;
+  @include loading($foreground);
+  z-index: 90;
+  display: none;
+}

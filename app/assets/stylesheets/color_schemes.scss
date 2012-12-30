@@ -1,0 +1,43 @@
+@import "mixins";
+
+// COLOR SCHEMES
+// -------------
+body {
+  background: $background;
+  color: $middle;
+
+  &.inverse { background: $foreground; }
+}
+
+a {
+  color: $middle;
+}
+
+.frame { background: $background; }
+  .inverse .frame { background: $foreground; }
+
+.inner-frame { background: $foreground; }
+  .inverse .inner-frame { background: $background; }
+
+.contents {
+  border-color: $middle;
+
+  &:before { border-color: $middle transparent; }
+  &:after { border-color: $background transparent; }
+
+  &.active { border-color: $yellow; }
+  &.active:before { border-color: $yellow transparent; }
+}
+  .inverse .contents:after { border-color: $foreground transparent; }
+
+.block {
+   border-color: transparent;
+
+   &:hover { border-color: $blue; }
+}
+
+.channel {
+  border-color: transparent;
+
+  &:hover { border-color: $yellow; }
+}

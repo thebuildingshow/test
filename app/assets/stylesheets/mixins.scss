@@ -8,6 +8,8 @@ $line-height: $unit;
 $page-width: 800px;
 $menu-width: 20%;
 
+// COLORS
+// ------
 $foreground: #000000;
 $background: #ffffff;
 $middle: #808080;
@@ -16,6 +18,18 @@ $blue: #0099ff;
 
 // UTILS
 // -----
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+.align-center { text-align: center; }
+
+// MIXINS
+// ------
+@mixin selection {
+  background: $foreground;
+  color: $background;
+  text-shadow: none;
+}
+
 @mixin serif-type {
   text-align: left;
   font-family: $serif;
@@ -44,7 +58,7 @@ $blue: #0099ff;
           transition: $transition;
 }
 
-@mixin clearfix() {
+@mixin clearfix {
   zoom: 1;
   &:before,
   &:after {
@@ -65,16 +79,6 @@ $blue: #0099ff;
          opacity: $opacity / 100;
 }
 
-@mixin striped($color, $angle: -45deg) {
-  background-color: $color !important;
-  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255,255,255,1)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255,255,255,1)), color-stop(.75, rgba(255,255,255,1)), color-stop(.75, transparent), to(transparent));
-  background-image: -webkit-linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
-  background-image: -moz-linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
-  background-image: -ms-linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
-  background-image: linear-gradient($angle, rgba(255,255,255,1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 75%, transparent 75%, transparent);
-}
-
 @mixin border-box {
      -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -88,32 +92,8 @@ $blue: #0099ff;
           background-size: $size;
 }
 
-@mixin loading($color: red, $angle: -45deg) {
-  @include striped($color, $angle);
-  background-repeat: repeat;
-  @include background-size(40px 40px);
-  -webkit-animation: progress-bar-stripes 2s linear infinite;
-     -moz-animation: progress-bar-stripes 2s linear infinite;
-          animation: progress-bar-stripes 2s linear infinite;
-}
-
 @mixin border-radius($radius: 5px) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
           border-radius: $radius;
-}
-
-@-webkit-keyframes progress-bar-stripes {
-  from  { background-position: 0 0; }
-  to    { background-position: 40px 0; }
-}
-
-@-moz-keyframes progress-bar-stripes {
-  from  { background-position: 0 0; }
-  to    { background-position: 40px 0; }
-}
-
-@keyframes progress-bar-stripes {
-  from  { background-position: 0 0; }
-  to    { background-position: 40px 0; }
 }
