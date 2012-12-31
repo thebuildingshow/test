@@ -100,8 +100,8 @@ class App.Views.BlockView extends Backbone.View
     'click .return': 'return'
 
   initialize: ->
-    @listenTo(App.mediator, 'block:return', @return)
-    @listenTo(App.mediator, 'block:remove', @remove)
+    @listenTo App.mediator, 'block:return', @return
+    @listenTo App.mediator, 'block:remove', @remove
 
   return: (e) ->
     e?.preventDefault()
