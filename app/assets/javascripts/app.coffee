@@ -110,6 +110,11 @@ class App.Views.BlockView extends Backbone.View
 
     window.history.back()
 
+  remove: ->
+    super
+
+    App.Utils.stopLoad()
+
   render: ->
     @$el.html @model.get('fragment')
 
