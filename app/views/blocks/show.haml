@@ -2,14 +2,14 @@
   = @block.generated_title
 
 .functions
-  = link_to '', '/', class: 'return interface-lrg-return'
+  = link_to "", "/", class: "return interface-lrg-return"
 
 .wrapper
 
   .inner-frame{ class: @block._class.downcase }
 
     - if @block.has_image?
-      = link_to appropriate_link(@block), target: '_blank' do
+      = link_to appropriate_link(@block), target: "_blank" do
       
         = image_tag image_proxy_path(@block.image.original.url)
         %b.image-outline
