@@ -4,7 +4,7 @@ Generic.helpers do
     block.selected ? "selected" : "not-selected"
   end
 
-  def image_proxy_path(src, dimensions='900x900')
+  def image_proxy_path(src, dimensions="900x900")
     "http://d2ss1gpcas6f9e.cloudfront.net/q/resize/#{dimensions}%3E/src/#{CGI.escape(src)}"
   end
 
