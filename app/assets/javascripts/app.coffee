@@ -46,10 +46,10 @@ class App.Shortcuts extends Backbone.Shortcuts
     "i": "invert"
   
   return: ->
-    App.mediator.trigger 'block:return'
+    App.mediator.trigger "block:return"
 
   invert: ->
-    $('body').toggleClass('inverse')
+    $("body").toggleClass("inverse")
 
 
 class App.Models.Object extends Backbone.Model
@@ -66,19 +66,19 @@ class App.Models.Object extends Backbone.Model
 
 class App.Views.ChannelView extends Backbone.View
   events:
-    'click .block': 'showBlock'
-    'click .channel': 'loadChannel'
+    "click .block": "showBlock"
+    "click .channel": "loadChannel"
 
   showBlock: (e) ->
     e.preventDefault()
 
-    App.router.navigate($(e.currentTarget).data('href'), { trigger: true })
+    App.router.navigate($(e.currentTarget).data("href"), { trigger: true })
 
   deactivateChannels: ->
-    $('.contents').removeClass('active')
+    $(".contents").removeClass("active")
 
   scrollToChannel: (channel) ->
-    $('html, body').animate { scrollTop: ($("##{channel.get('slug')}").offset().top - 20) }, 'fast'
+    $("html, body").animate { scrollTop: ($("##{channel.get('slug')}").offset().top - 20) }, "fast"
 
   loadChannel: (e) ->
     $target = $(e.currentTarget)
@@ -88,20 +88,20 @@ class App.Views.ChannelView extends Backbone.View
     @deactivateChannels()
 
     $.when(channel.fetch()).then =>
-      $target.after(channel.get('fragment')).remove()
+      $target.after(channel.get("fragment")).remove()
 
       @scrollToChannel(channel)
 
 
 class App.Views.BlockView extends Backbone.View
-  id: 'frame'
-  className: 'frame'
+  id: "frame"
+  className: "frame"
   events:
-    'click .return': 'return'
+    "click .return": "return"
 
   initialize: ->
-    @listenTo App.mediator, 'block:return', @return
-    @listenTo App.mediator, 'block:remove', @remove
+    @listenTo App.mediator, "block:return", @return
+    @listenTo App.mediator, "block:remove", @remove
 
   return: (e) ->
     e?.preventDefault()
@@ -116,20 +116,20 @@ class App.Views.BlockView extends Backbone.View
     App.Utils.stopLoad()
 
   render: ->
-    @$el.html @model.get('fragment')
+    @$el.html @model.get("fragment")
 
 
 class App.Routers.Router extends Backbone.Router
   routes:
-    '': 'channel'
-    ':channel': 'channel'
-    'view/:block': 'block'
+    "": "channel"
+    ":channel": "channel"
+    "view/:block": "block"
 
   initialize: ->
-    @channel($('.wrapper').first().attr('id'))
+    @channel($(".wrapper").first().attr("id"))
 
   channel: (id) ->
-    App.mediator.trigger 'block:remove'
+    App.mediator.trigger "block:remove"
 
     if id
       @channel = new App.Models.Object(slug: id)
@@ -143,7 +143,7 @@ class App.Routers.Router extends Backbone.Router
     $.when(block.fetch()).then =>
       @view = new App.Views.BlockView(model: block)
 
-      $('body').prepend(@view.render())
+      $("body").prepend(@view.render())
 
       App.Utils.indicateImageLoad(@view)
 
