@@ -52,7 +52,7 @@ class App.Shortcuts extends Backbone.Shortcuts
     $("body").toggleClass("inverse")
 
 
-class App.Models.Object extends Backbone.Model
+class App.Models.Connectable extends Backbone.Model
   fetch: ->
     App.Utils.startLoad()
     
@@ -83,7 +83,7 @@ class App.Views.ChannelView extends Backbone.View
   loadChannel: (e) ->
     $target = $(e.currentTarget)
     
-    channel = new App.Models.Object(href: $target.data('href'), slug: $target.data('slug'))
+    channel = new App.Models.Connectable(href: $target.data('href'), slug: $target.data('slug'))
 
     @deactivateChannels()
 
@@ -132,13 +132,13 @@ class App.Routers.Router extends Backbone.Router
     App.mediator.trigger "block:remove"
 
     if id
-      @channel = new App.Models.Object(slug: id)
+      @channel = new App.Models.Connectable(slug: id)
       @view = new App.Views.ChannelView(model: @channel)
 
       App.Utils.attachView(@view)
 
   block: (path) ->
-    block = new App.Models.Object(href: path)
+    block = new App.Models.Connectable(href: path)
 
     $.when(block.fetch()).then =>
       @view = new App.Views.BlockView(model: block)
