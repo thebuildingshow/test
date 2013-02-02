@@ -40,10 +40,4 @@ Generic.helpers do
     end
   end
 
-  [:image, :text, :link, :media, :attachment, :channel].each do |type|
-    define_method "is_#{type}?" do |block|
-      block._class == type.to_s.capitalize
-    end
-  end
-
 end
