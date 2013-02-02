@@ -9,9 +9,9 @@
   .contents.active
     - @channel.contents.each do |connectable|
       - if connectable.is_channel?
-        .channel.object{ data: { href: encoded_url(connectable), slug: connectable.slug } }
+        .channel.connectable{ data: { href: encoded_url(connectable), slug: connectable.slug, position: connectable.position, id: connectable.id } }
           = connectable.title
       
       - else
-        .block.object{ class: connectable._class.downcase, data: { href: encoded_url(connectable) } }
+        .block.connectable{ class: connectable._class.downcase, data: { href: encoded_url(connectable), position: connectable.position, id: connectable.id } }
           = appropriate_preview(connectable)
