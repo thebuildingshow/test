@@ -16,9 +16,10 @@ Generic.helpers do
     decrypt_value(Base64.urlsafe_decode64(id))
   end
 
-  def encoded_url(object, via=nil)
+  def encoded_url(object, options={})
     kind = object._base_class.downcase.pluralize.to_sym
-    url_for(kind, :show, id: encode(object.id.to_s), via: via)
+
+    url_for(kind, :show, id: encode(object.id.to_s), next: options[:next], prev: options[:prev], via: options[:via])
   end
 
   def color_scheme
