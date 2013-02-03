@@ -9,7 +9,7 @@ Generic.helpers do
   end
 
   def channel_or_block_path(block)
-    is_channel?(block) ? "/#{encode(block.slug)}" : "/view/#{encode(block.id.to_s)}"
+    block.is_channel? ? "/#{encode(block.slug)}" : "/view/#{encode(block.id.to_s)}"
   end
 
   def display_metadata?(block)
@@ -21,9 +21,9 @@ Generic.helpers do
   end
 
   def appropriate_link(block)
-    if is_link?(block)
+    if block.is_link?
       block.source.url
-    elsif is_attachment?(block)
+    elsif block.is_attachment?
       block.attachment.url
     elsif block.has_image?
       block.image.original.url
@@ -33,7 +33,7 @@ Generic.helpers do
   def appropriate_preview(block)
     if block.has_image?
       image_tag appropriate_image(block)
-    elsif is_text?(block)
+    elsif block.is_text?
       block.content_html
     else
       block.generated_title
