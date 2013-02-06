@@ -1,5 +1,5 @@
 App =
-  source: $('meta[name=source]').attr("content")
+  source: $("meta[name=source]").attr("content")
 
   Models: {}
   Collections: {}
@@ -14,10 +14,13 @@ App =
       $("#loading").hide()
 
     removeFrame: ->
-      $('#frame').remove()
+      $("#frame").remove()
 
     shouldLoadApplication: ->
       !/view/g.test(window.location.pathname)
+
+    hasQueryString: (string) ->
+      /\?/g.test(string)
 
     attachView: (view) ->
       view.setElement("##{view.model.get('slug')}")
@@ -25,7 +28,7 @@ App =
     indicateImageLoad: (view) ->
       App.Utils.startLoad()
 
-      view.$('img').imagesLoaded ->
+      view.$("img").imagesLoaded ->
         App.Utils.stopLoad()
 
   initialize: ->
@@ -44,6 +47,8 @@ class App.Shortcuts extends Backbone.Shortcuts
   shortcuts:
     "esc": "return"
     "i": "invert"
+    "right": "next"
+    "left": "prev"
   
   return: ->
     App.mediator.trigger "block:return"
@@ -51,18 +56,42 @@ class App.Shortcuts extends Backbone.Shortcuts
   invert: ->
     $("body").toggleClass("inverse")
 
+  next: ->
+    App.mediator.trigger "block:move", "next"
+
+  prev: ->
+    App.mediator.trigger "block:move", "prev"
 
 class App.Models.Connectable extends Backbone.Model
-  fetch: ->
+  url: -> @get("url")
+
+  fetch: (options) ->
     App.Utils.startLoad()
     
     $.ajax
-      url: "#{@get('href')}"
+      url: @get("url")
+
       success: (response) =>
         App.Utils.stopLoad()
 
         @set { fragment: response }
+      
+      error: (response) =>
+        App.Utils.stopLoad()
 
+class App.Models.Channel extends App.Models.Connectable
+
+class App.Models.Block extends App.Models.Connectable
+  initialize: ->
+    @setAttributes() if App.Utils.hasQueryString(@get("url"))
+
+  move: (direction="next") ->
+    $("##{@get('via')}_#{@get(direction)}").data("url")
+
+  setAttributes: ->
+    queryString = @get("url").split("?")[1].split("&")
+
+    @set(pair[0], pair[1]) for pair in (pairs.split("=") for pairs in queryString)
 
 class App.Views.ChannelView extends Backbone.View
   events:
@@ -72,7 +101,7 @@ class App.Views.ChannelView extends Backbone.View
   showBlock: (e) ->
     e.preventDefault()
 
-    App.router.navigate($(e.currentTarget).data("href"), { trigger: true })
+    App.router.navigate($(e.currentTarget).data("url"), { trigger: true })
 
   deactivateChannels: ->
     $(".contents").removeClass("active")
@@ -83,7 +112,7 @@ class App.Views.ChannelView extends Backbone.View
   loadChannel: (e) ->
     $target = $(e.currentTarget)
     
-    channel = new App.Models.Connectable(href: $target.data('href'), slug: $target.data('slug'))
+    channel = new App.Models.Channel(url: $target.data("url"), slug: $target.data("slug"))
 
     @deactivateChannels()
 
@@ -100,24 +129,25 @@ class App.Views.BlockView extends Backbone.View
     "click .return": "return"
 
   initialize: ->
+    @listenTo App.mediator, "block:move", @move
     @listenTo App.mediator, "block:return", @return
     @listenTo App.mediator, "block:remove", @remove
 
   return: (e) ->
     e?.preventDefault()
 
-    @remove()
-
-    window.history.back()
+    App.router.navigate("/", { trigger: true })
 
   remove: ->
     super
-
+    
     App.Utils.stopLoad()
+
+  move: (direction) ->
+    App.router.navigate(@model.move(direction), { trigger: true })
 
   render: ->
     @$el.html @model.get("fragment")
-
 
 class App.Routers.Router extends Backbone.Router
   routes:
@@ -132,20 +162,22 @@ class App.Routers.Router extends Backbone.Router
     App.mediator.trigger "block:remove"
 
     if id
-      @channel = new App.Models.Connectable(slug: id)
+      @channel = new App.Models.Channel(slug: id)
       @view = new App.Views.ChannelView(model: @channel)
 
       App.Utils.attachView(@view)
 
   block: (path) ->
-    block = new App.Models.Connectable(href: path)
+    App.mediator.trigger "block:remove"
+
+    block = new App.Models.Block(url: path)
 
     $.when(block.fetch()).then =>
-      @view = new App.Views.BlockView(model: block)
+      @lightbox = new App.Views.BlockView(model: block)
 
-      $("body").prepend(@view.render())
+      $("body").prepend(@lightbox.render())
 
-      App.Utils.indicateImageLoad(@view)
+      App.Utils.indicateImageLoad(@lightbox)
 
 
 $ -> App.initialize() if App.Utils.shouldLoadApplication()
