@@ -6,4 +6,8 @@ class Generic < Padrino::Application
   register Padrino::Assets
   
   enable :sessions
+
+  configure do 
+    set :haml, ugly: :true
+  end
 end
