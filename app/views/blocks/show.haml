@@ -6,7 +6,10 @@
 
 .wrapper
   .inner-frame{ class: @block._class.downcase }
-    - if @block.has_image?
+    - if @block.has_embed?
+      = @block.embed.html
+
+    - if @block.has_image? && !@block.has_embed?
       = link_to appropriate_link(@block), target: "_blank" do
         = image_tag image_proxy_path(@block.image.original.url)
         %b.image-outline
