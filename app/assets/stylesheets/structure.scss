@@ -59,25 +59,22 @@
 
 .connectable {
   display: inline-block;
-  margin: $unit/4;
+  margin: -$unit/4;
+  padding: $unit;
   vertical-align: bottom;
   position: relative;
+  cursor: pointer;
+  border: $unit/4 solid transparent;
   @include border-radius(3px);
   @include transition(border-color 0.125s);
 }
 
 .block {
-  border-width: $unit/4;
-  border-style: solid;
-  cursor: pointer;
+  // 
 }
 
 .channel {
   display: inline-block;
-  padding: $unit;
-  border-width: $unit/4;
-  border-style: solid;
-  cursor: pointer;
   font-weight: bold;
   font-size: 1.1428em;
   line-height: 1.25em;
