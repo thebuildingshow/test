@@ -28,13 +28,19 @@ a {
   &.active { border-color: $yellow; }
   &.active:before { border-color: $yellow transparent; }
 }
-  .inverse .contents:after { border-color: $foreground transparent; }
+  .inverse .contents {
+    &:after { border-color: $foreground transparent; }
+
+    &.active { border-color: $blue; }
+    &.active:before { border-color: $blue transparent; }
+  }
 
 .block {
    border-color: transparent;
 
    &:hover { border-color: $blue; }
 }
+  .inverse .block:hover { border-color: $yellow; }
 
 .channel {
   border-color: transparent;
