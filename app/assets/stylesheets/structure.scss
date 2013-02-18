@@ -59,8 +59,7 @@
 
 .connectable {
   display: inline-block;
-  margin: -$unit/4;
-  padding: $unit;
+  margin: $unit/4;
   vertical-align: bottom;
   position: relative;
   cursor: pointer;
@@ -78,6 +77,7 @@
   font-weight: bold;
   font-size: 1.1428em;
   line-height: 1.25em;
+  padding: $unit/2 $unit;
 }
 
 .functions {
