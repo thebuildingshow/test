@@ -1,4 +1,4 @@
-Generic.helpers do
+App.helpers do
   def move(direction, channel, i)
     operator = direction == :next ? :+ : :-
 

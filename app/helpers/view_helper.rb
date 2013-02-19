@@ -1,4 +1,4 @@
-Generic.helpers do
+App.helpers do
 
   def selected_class(block)
     block.selected ? "selected" : "not-selected"

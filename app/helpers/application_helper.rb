@@ -1,4 +1,4 @@
-Generic.helpers do
+App.helpers do
   def encrypt_value(val)
     Encryptor.encrypt(val, key: KEY)
   end
