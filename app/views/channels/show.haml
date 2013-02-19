@@ -13,5 +13,5 @@
           = connectable.title
       
       - else
-        .block.connectable{ id: current(@channel, connectable.id), class: connectable._class.downcase, data: { url: encoded_url(connectable, { next: move(:next, @channel, i), prev: move(:prev, @channel, i), via: @channel.slug }) } }
+        .block.connectable{ id: current(@channel, connectable.id), class: connectable_classes(connectable), data: { url: encoded_url(connectable, { next: move(:next, @channel, i), prev: move(:prev, @channel, i), via: @channel.slug }) } }
           = appropriate_preview(connectable)

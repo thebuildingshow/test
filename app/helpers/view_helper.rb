@@ -1,7 +1,13 @@
 App.helpers do
-
   def selected_class(block)
     block.selected ? "selected" : "not-selected"
+  end
+
+  def connectable_classes(connectable)
+    classes = []
+    classes << connectable._class.downcase
+    classes << (connectable.has_image? ? "yes-image" : "no-image")
+    classes.join(" ")
   end
 
   def image_proxy_path(src, dimensions="900x900")
@@ -39,5 +45,4 @@ App.helpers do
       block.generated_title
     end
   end
-
 end
