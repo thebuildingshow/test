@@ -40,6 +40,8 @@ end
 # Add your after (RE)load hooks here
 #
 Padrino.after_load do
+  # Handle UTF-8
+  Encoding.default_internal = nil
 end
 
 Padrino.load!
