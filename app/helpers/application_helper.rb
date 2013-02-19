@@ -1,5 +1,4 @@
 Generic.helpers do
-
   def encrypt_value(val)
     Encryptor.encrypt(val, key: KEY)
   end
@@ -17,6 +16,8 @@ Generic.helpers do
   end
 
   def encoded_url(object, options={})
+    return "/" if object.id == DEFAULT_CHANNEL_IDENTIFIER
+    
     kind = object._base_class.downcase.pluralize.to_sym
 
     url_for(kind, :show, id: encode(object.id.to_s), next: options[:next], prev: options[:prev], via: options[:via])
@@ -25,5 +26,4 @@ Generic.helpers do
   def color_scheme
     ["normal", "inverse"].sample
   end
-
 end
