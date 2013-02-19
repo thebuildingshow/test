@@ -136,7 +136,9 @@ class App.Views.BlockView extends Backbone.View
   return: (e) ->
     e?.preventDefault()
 
-    App.router.navigate("/", { trigger: true })
+    via = $("##{@model.get('via')}").data("url")
+
+    App.router.navigate(via, { trigger: true })
 
   remove: ->
     super
