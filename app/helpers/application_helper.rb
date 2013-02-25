@@ -1,4 +1,22 @@
 App.helpers do
+  def authenticate_or_request_with_http_basic(realm="Application")
+    authenticate_with_http_basic || request_http_basic_authentication(realm)
+  end
+
+  def authenticate_with_http_basic
+    if auth_str = request.env["HTTP_AUTHORIZATION"]
+      ENV["USERNAME_PASSWORD"] == Base64.decode64(auth_str.sub(/^Basic\s+/, ""))
+    end
+  end
+
+  def request_http_basic_authentication(realm="Application")
+    response.headers["WWW-Authenticate"] = %(Basic realm="Application")
+    response.body = "HTTP Basic: Access denied.\n"
+    response.status = 401
+    
+    false
+  end
+  
   def encrypt_value(val)
     Encryptor.encrypt(val, key: KEY)
   end
