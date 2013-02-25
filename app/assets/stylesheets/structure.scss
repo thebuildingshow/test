@@ -25,9 +25,9 @@
 
 .contents {
   position:relative;
-  border-width: $unit/4;
+  border-width: ($unit / 4);
   border-style: solid;
-  margin: $unit/4;
+  margin: ($unit / 4);
   padding: $unit;
   height: 100%;
   @include border-radius(3px);
@@ -59,11 +59,11 @@
 
 .connectable {
   display: inline-block;
-  margin: $unit/4;
+  margin: ($unit / 4);
   vertical-align: bottom;
   position: relative;
   cursor: pointer;
-  border: $unit/4 solid transparent;
+  border: ($unit / 4) solid transparent;
   @include border-radius(3px);
   @include transition(border-color 0.125s);
 }
@@ -77,13 +77,13 @@
   font-weight: bold;
   font-size: 1.1428em;
   line-height: 1.25em;
-  padding: $unit/2 $unit;
+  padding: ($unit / 2) $unit;
 }
 
 .functions {
   position: fixed;
-  top: $unit*2;
-  right: $unit*2;
+  top: ($unit * 2);
+  right: ($unit * 2);
   z-index: 1;
 }
 
@@ -100,7 +100,7 @@
 
 .inner-frame {
   width: 100%;
-  min-height: 40px + ($unit*2);
+  min-height: (40px + ($unit * 2));
   padding: $unit;
   text-align: center;
   position: relative;
@@ -130,6 +130,6 @@
 }
 
 .attachment.no-image {
-  padding: $unit/2 $unit;
+  padding: ($unit / 2) $unit;
   font-weight: bold;
 }
