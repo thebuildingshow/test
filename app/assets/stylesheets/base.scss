@@ -39,7 +39,7 @@ img {
 blockquote {
   margin-left: 0;
   padding-left: $unit;
-  border-left: $unit/4 solid;
+  border-left: ($unit / 4) solid;
 }
 
 ul {
@@ -54,3 +54,5 @@ code {
   font-size: 12px;
   line-height: 20px;
 }
+
+input { padding: ($unit / 2); }
