@@ -32,9 +32,9 @@ App =
         App.Utils.stopLoad()
 
   initialize: ->
-    @mediator = new App.Mediator
+    @mediator  = new App.Mediator
     @shortcuts = new App.Shortcuts
-    @router = new App.Routers.Router
+    @router    = new App.Routers.Router
 
     Backbone.history.start({ pushState: true })
 
@@ -45,10 +45,10 @@ class App.Mediator
 
 class App.Shortcuts extends Backbone.Shortcuts
   shortcuts:
-    "esc": "return"
-    "i": "invert"
-    "right": "next"
-    "left": "prev"
+    "esc"   : "return"
+    "i"     : "invert"
+    "right" : "next"
+    "left"  : "prev"
   
   return: ->
     App.mediator.trigger "block:return"
@@ -61,6 +61,7 @@ class App.Shortcuts extends Backbone.Shortcuts
 
   prev: ->
     App.mediator.trigger "block:move", "prev"
+
 
 class App.Models.Connectable extends Backbone.Model
   url: -> @get("url")
@@ -79,7 +80,9 @@ class App.Models.Connectable extends Backbone.Model
       error: (response) =>
         App.Utils.stopLoad()
 
+
 class App.Models.Channel extends App.Models.Connectable
+
 
 class App.Models.Block extends App.Models.Connectable
   initialize: ->
@@ -93,10 +96,11 @@ class App.Models.Block extends App.Models.Connectable
 
     @set(pair[0], pair[1]) for pair in (pairs.split("=") for pairs in queryString)
 
+
 class App.Views.ChannelView extends Backbone.View
   events:
-    "click .block": "showBlock"
-    "click .channel": "loadChannel"
+    "click .block"   : "showBlock"
+    "click .channel" : "loadChannel"
 
   showBlock: (e) ->
     e.preventDefault()
@@ -151,11 +155,12 @@ class App.Views.BlockView extends Backbone.View
   render: ->
     @$el.html @model.get("fragment")
 
+
 class App.Routers.Router extends Backbone.Router
   routes:
-    "": "channel"
-    ":channel": "channel"
-    "view/:block": "block"
+    ""            : "channel"
+    ":channel"    : "channel"
+    "view/:block" : "block"
 
   initialize: ->
     @channel($(".wrapper").first().attr("id"))
