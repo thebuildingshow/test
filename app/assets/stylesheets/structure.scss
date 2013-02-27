@@ -87,6 +87,11 @@
   z-index: 1;
 }
 
+.return {
+  font-size: ($unit * 2);
+  line-height: 0;
+}
+
 .title,
 .attachment-download {
   font-weight: bold;
