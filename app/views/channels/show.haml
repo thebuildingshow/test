@@ -2,7 +2,6 @@
   = @channel.title
 
 .wrapper{ id: @channel.slug, data: { url: encoded_url(@channel) } }
-
   .header
     = link_to @channel.title, encoded_url(@channel)
 
