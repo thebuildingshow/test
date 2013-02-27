@@ -170,7 +170,7 @@ class App.Routers.Router extends Backbone.Router
 
     if id
       @channel = new App.Models.Channel(slug: id)
-      @view = new App.Views.ChannelView(model: @channel)
+      @view    = new App.Views.ChannelView(model: @channel)
 
       App.Utils.attachView(@view)
 
