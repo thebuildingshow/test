@@ -89,7 +89,7 @@ class App.Models.Block extends App.Models.Connectable
     @setAttributes() if App.Utils.hasQueryString(@get("url"))
 
   move: (direction="next") ->
-    $("##{@get('via')}_#{@get(direction)}").data("url")
+    $("##{@get('via')}_#{@get(direction)}").attr("href")
 
   setAttributes: ->
     queryString = @get("url").split("?")[1].split("&")
@@ -105,7 +105,7 @@ class App.Views.ChannelView extends Backbone.View
   showBlock: (e) ->
     e.preventDefault()
 
-    App.router.navigate($(e.currentTarget).data("url"), { trigger: true })
+    App.router.navigate($(e.currentTarget).attr("href"), { trigger: true })
 
   deactivateChannels: ->
     $(".contents").removeClass("active")
@@ -114,9 +114,11 @@ class App.Views.ChannelView extends Backbone.View
     $("html, body").animate { scrollTop: ($("##{channel.get('slug')}").offset().top - 20) }, "fast"
 
   loadChannel: (e) ->
+    e.preventDefault()
+    
     $target = $(e.currentTarget)
     
-    channel = new App.Models.Channel(url: $target.data("url"), slug: $target.data("slug"))
+    channel = new App.Models.Channel(url: $target.attr("href"), slug: $target.data("slug"))
 
     @deactivateChannels()
 
@@ -140,7 +142,7 @@ class App.Views.BlockView extends Backbone.View
   return: (e) ->
     e?.preventDefault()
 
-    via = $("##{@model.get('via')}").data("url")
+    via = $("##{@model.get('via')}").attr("href")
 
     App.router.navigate(via, { trigger: true })
 

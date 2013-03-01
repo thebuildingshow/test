@@ -8,9 +8,9 @@
   .contents.active
     - @channel.contents.each_with_index do |connectable, i|
       - if connectable.is_channel?
-        .channel.connectable{ data: { url: encoded_url(connectable), slug: connectable.slug } }
+        = link_to encoded_url(connectable), { class: "channel connectable", data: { slug: connectable.slug } } do
           = connectable.title
       
       - else
-        .block.connectable{ id: current(@channel, connectable.id), class: connectable_classes(connectable), data: { url: encoded_url(connectable, { next: move(:next, @channel, i), prev: move(:prev, @channel, i), via: @channel.slug }) } }
+        = link_to encoded_url(connectable, { next: move(:next, @channel, i), prev: move(:prev, @channel, i), via: @channel.slug }), { class: "block connectable #{connectable_classes(connectable)}", id: current(@channel, connectable.id) } do
           = appropriate_preview(connectable)
