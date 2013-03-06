@@ -40,7 +40,7 @@ App.helpers do
     if block.has_image?
       image_tag appropriate_image(block)
     elsif block.is_text?
-      block.content_html
+      Sanitize.clean(block.content_html, elements: %w(p br b i strong em))
     else
       block.generated_title
     end
