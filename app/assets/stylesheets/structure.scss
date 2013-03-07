@@ -138,3 +138,11 @@
   padding: ($unit / 2) $unit;
   font-weight: bold;
 }
+
+// ERRORS
+// ------
+.error {
+  margin: $unit;
+  text-align: center;
+  font-weight: bold;
+}
