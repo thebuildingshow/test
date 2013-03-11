@@ -20,8 +20,8 @@ class App < Padrino::Application
     set :haml, ugly: :true
   end
 
-  error 400..510 do
-    status 404
+  error 403..510 do
+    status 404 if status == 500
     render("errors/generic")
   end
 end
