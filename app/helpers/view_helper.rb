@@ -38,7 +38,7 @@ App.helpers do
 
   def appropriate_preview(block)
     if block.has_image?
-      image_tag appropriate_image(block)
+      image_tag appropriate_image(block), alt: block.generated_title
     elsif block.is_text?
       Sanitize.clean(block.content_html, elements: %w(p br b i strong em))
     else
