@@ -91,6 +91,10 @@ class App.Models.Block extends App.Models.Connectable
   move: (direction="next") ->
     $("##{@get('via')}_#{@get(direction)}").attr("href")
 
+  return: ->
+    $("##{@get('via')}").data("url")
+
+
   setAttributes: ->
     queryString = @get("url").split("?")[1].split("&")
 
@@ -142,9 +146,7 @@ class App.Views.BlockView extends Backbone.View
   return: (e) ->
     e?.preventDefault()
 
-    via = $("##{@model.get('via')}").attr("href")
-
-    App.router.navigate(via, { trigger: true })
+    App.router.navigate(@model.return(), { trigger: true })
 
   remove: ->
     super
