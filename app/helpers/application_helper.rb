@@ -33,6 +33,14 @@ App.helpers do
     decrypt_value(Base64.urlsafe_decode64(id))
   end
 
+  def return_url(via=nil)
+    return "/" if via.nil?
+
+    encoded = encode(via)
+
+    url_for(:channels, :show, id: encoded)
+  end
+
   def encoded_url(object, options={})
     return "/" if object.id == DEFAULT_CHANNEL_IDENTIFIER
     
