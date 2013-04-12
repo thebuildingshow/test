@@ -1,6 +1,6 @@
 App.controllers :channels do
   get :index, map: "/" do
-    @channel = CachedArena.channel(DEFAULT_CHANNEL_IDENTIFIER)
+    @channel = CachedArena.channel(DEFAULT_CHANNEL_IDENTIFIER[:id])
     render("channels/show")
   end
 

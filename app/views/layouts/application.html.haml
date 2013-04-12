@@ -2,7 +2,7 @@
 %html{ lang: "en" }
   %head
     %title= yield_content :title
-    = meta_tag DEFAULT_CHANNEL_IDENTIFIER, name: "source"
+    = meta_tag DEFAULT_CHANNEL_IDENTIFIER[:id], name: "source"
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
 

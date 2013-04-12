@@ -34,7 +34,7 @@ App.helpers do
   end
 
   def return_url(via=nil)
-    return "/" if via.nil?
+    return "/" if (via.nil? || via == DEFAULT_CHANNEL_IDENTIFIER[:slug])
 
     encoded = encode(via)
 
@@ -42,7 +42,7 @@ App.helpers do
   end
 
   def encoded_url(object, options={})
-    return "/" if object.id == DEFAULT_CHANNEL_IDENTIFIER
+    return "/" if object.id == DEFAULT_CHANNEL_IDENTIFIER[:id]
     
     kind = object._base_class.downcase.pluralize.to_sym
 
