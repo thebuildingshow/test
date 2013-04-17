@@ -34,7 +34,7 @@ App.helpers do
   end
 
   def return_url(via=nil)
-    return "/" if (via.nil? || via == DEFAULT_CHANNEL_IDENTIFIER[:slug])
+    return "/" if (via.nil? || is_home?(via))
 
     encoded = encode(via)
 
@@ -42,7 +42,7 @@ App.helpers do
   end
 
   def encoded_url(object, options={})
-    return "/" if object.id == DEFAULT_CHANNEL_IDENTIFIER[:id]
+    return "/" if is_home?(object.id)
     
     kind = object._base_class.downcase.pluralize.to_sym
 
@@ -51,5 +51,16 @@ App.helpers do
 
   def color_scheme
     ["normal", "inverse"].sample
+  end
+
+  def is_home?(identifier)
+    DEFAULT_CHANNEL_IDENTIFIER.values.include?(identifier)
+  end
+
+  def display_home_link?(identifier)
+    # Cannot just rely on the request path due to the 
+    # slug for home being sometimes encrypted
+    # 
+    !request.xhr? && !is_home?(identifier)
   end
 end

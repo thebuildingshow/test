@@ -3,6 +3,10 @@
 
 .wrapper{ id: @channel.slug, data: { url: encoded_url(@channel) } }
   .header
+    - if display_home_link?(@channel.id)
+      = link_to "Damon Zucconi", "/"
+      %span.separator /
+
     = link_to @channel.title, encoded_url(@channel)
 
   .contents.active
