@@ -14,6 +14,10 @@ App.helpers do
     "http://d2ss1gpcas6f9e.cloudfront.net/q/resize/#{dimensions}%3E/src/#{CGI.escape(src)}"
   end
 
+  def download_string(block)
+    "Download #{block.attachment.file_name} (#{block.attachment.file_size_display} .#{block.attachment.extension})"
+  end
+
   def channel_or_block_path(block)
     block.is_channel? ? "/#{encode(block.slug)}" : "/view/#{encode(block.id.to_s)}"
   end

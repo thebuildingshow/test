@@ -6,25 +6,7 @@
 
 .wrapper
   .inner-frame{ class: @block._class.downcase }
-    - if @block.has_embed?
-      = @block.embed.html
-
-    - if @block.has_image? && !@block.has_embed?
-      = link_to appropriate_link(@block), target: "_blank" do
-        = image_tag image_proxy_path(@block.image.original.url), alt: @block.generated_title
-        %b.image-outline
-
-    - if @block.has_attachment?
-      .attachment-download
-        = link_to "Download #{@block.attachment.file_name} (#{@block.attachment.file_size_display} .#{@block.attachment.extension})", @block.attachment.url
-
-    - if @block.is_text?
-      = @block.content_html
+    = partial "blocks/content", locals: { block: @block }
 
   - if display_metadata?(@block)
-    .metadata
-      - if @block.title
-        .title= @block.title
-
-      - if @block.description
-        .description= @block.description_html
+    = partial "blocks/metadata", locals: { block: @block }

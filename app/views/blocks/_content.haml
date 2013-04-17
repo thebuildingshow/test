@@ -1,0 +1,14 @@
+- if block.has_embed?
+  = block.embed.html
+
+- if block.has_image? && !block.has_embed?
+  = link_to appropriate_link(block), target: "_blank" do
+    = image_tag image_proxy_path(block.image.original.url), alt: block.generated_title
+    %b.image-outline
+
+- if block.has_attachment?
+  .attachment-download
+    = link_to download_string(block), block.attachment.url
+
+- if block.is_text?
+  = block.content_html
