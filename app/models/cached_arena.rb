@@ -5,7 +5,7 @@ class CachedArena
       cache = App.cache.get(key)
 
       if cache.nil?
-        App.cache.set(key, Arena.send(method, id), expires_in: 30)
+        App.cache.set(key, Arena.send(method, id), expires_in: 86400)
         cache = App.cache.get(key)
       end
 
