@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/arenahq/arena-rb.git
-  revision: daa9a192fc319a68aaeb57530d36993a6e19ae35
+  revision: 73922c2c6611a9db6d5c417310f59a7177ceca3a
   specs:
     arena (0.0.9)
       httparty
@@ -24,19 +24,19 @@ GEM
     http_router (0.10.2)
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
-    httparty (0.10.2)
+    httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     i18n (0.6.4)
-    json (1.7.6)
+    json (1.8.0)
     kgio (2.8.0)
     mail (2.3.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
-    multi_json (1.6.1)
-    multi_xml (0.5.2)
+    multi_json (1.7.3)
+    multi_xml (0.5.3)
     nokogiri (1.5.6)
     padrino (0.10.7)
       padrino-admin (= 0.10.7)
