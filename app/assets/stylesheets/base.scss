@@ -56,5 +56,22 @@ code {
 }
 
 input {
+  width: 100%;
   padding: ($unit / 2);
+}
+
+.button,
+a.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  border: none;
+  font-family: $sans;
+  font-size: 1.1428em;
+  line-height: 1.25em;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  @include transition(background-color 0.25s);
 }

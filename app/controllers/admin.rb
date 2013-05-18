@@ -9,6 +9,11 @@ App.controllers :admin do
 
   post :encrypt, map: "/admin/encrypt" do
     @channel = Arena.channel(params[:id])
-    redirect encoded_url(@channel)
+    redirect(encoded_url(@channel))
+  end
+
+  post :purge, map: "/admin/purge" do
+    App.cache.flush
+    redirect(url_for(:channels, :index))
   end
 end

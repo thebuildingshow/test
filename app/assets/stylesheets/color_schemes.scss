@@ -16,6 +16,30 @@ a {
 }
   .inverse a:hover { color: lighten($middle, 25%); }
 
+.button,
+a.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  color: $middle;
+  background: $foreground;
+
+  &:hover { background: lighten($foreground, 25%); }
+}
+  .inverse {
+    .button,
+    a.button,
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+      background: $background;
+
+      &:hover { background: darken($background, 25%); }
+    }
+  }
+
 .frame {
   background: $background;
 
