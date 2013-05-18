@@ -41,12 +41,25 @@ App.helpers do
   end
 
   def appropriate_preview(block)
-    if block.has_image?
-      image_tag appropriate_image(block), alt: block.generated_title
-    elsif block.is_text?
+    case block
+    when Arena::Link
+      html = []
+      html << (image_tag appropriate_image(block), alt: block.generated_title)
+      html << (content_tag :span, "", data: { href: block.source.url }, class: "link-open icon-link")
+      html.join("")
+    when Arena::Media
+      html = []
+      html << (image_tag appropriate_image(block), alt: block.generated_title)
+      html << (content_tag :span, "", class: "media-play icon-play")
+      html.join("")
+    when Arena::Text
       Sanitize.clean(block.content_html, elements: %w(p br b i strong em))
     else
-      block.generated_title
+      if block.has_image?
+        image_tag appropriate_image(block), alt: block.generated_title
+      else
+        block.generated_title
+      end
     end
   end
 end

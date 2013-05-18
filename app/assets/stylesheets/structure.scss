@@ -59,13 +59,37 @@
 
 .connectable {
   display: inline-block;
+  position: relative;
   margin: ($unit / 4);
   vertical-align: bottom;
-  position: relative;
   cursor: pointer;
   border: ($unit / 4) solid transparent;
   @include border-radius(3px);
   @include transition(border-color 0.125s);
+
+  &.link:hover {
+    & > .link-open { opacity: 1; }
+  }
+
+  &.media:hover {
+    & > .media-play { background-color: #000; }
+  }
+}
+
+.link-open,
+.media-play {
+  @include overlay();
+}
+
+.media-play {
+  @include transition(background-color 0.25s);
+}
+
+.link-open {
+  opacity: 0;
+  @include transition(opacity 0.25s);
+
+  &:hover { background: #000; }
 }
 
 .block {

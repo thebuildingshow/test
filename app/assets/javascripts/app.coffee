@@ -103,13 +103,19 @@ class App.Models.Block extends App.Models.Connectable
 
 class App.Views.ChannelView extends Backbone.View
   events:
-    "click .block"   : "showBlock"
-    "click .channel" : "loadChannel"
+    "click .block"     : "showBlock"
+    "click .link-open" : "openLink"
+    "click .channel"   : "loadChannel"
 
   showBlock: (e) ->
     e.preventDefault()
 
     App.router.navigate($(e.currentTarget).attr("href"), { trigger: true })
+
+  openLink: (e) ->
+    window.open($(e.currentTarget).data("href"))
+
+    false
 
   deactivateChannels: ->
     $(".contents").removeClass("active")
