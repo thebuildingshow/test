@@ -11,7 +11,10 @@ body {
 
 a {
   color: $middle;
+
+  &:hover { color: lighten($middle, 25%); }
 }
+  .inverse a:hover { color: darken($middle, 25%); }
 
 .frame { background: $background; }
   .inverse .frame { background: $foreground; }
