@@ -12,12 +12,20 @@ body {
 a {
   color: $middle;
 
-  &:hover { color: lighten($middle, 25%); }
+  &:hover { color: darken($middle, 25%); }
 }
-  .inverse a:hover { color: darken($middle, 25%); }
+  .inverse a:hover { color: lighten($middle, 25%); }
 
-.frame { background: $background; }
-  .inverse .frame { background: $foreground; }
+.frame {
+  background: $background;
+
+  a:hover { color: lighten($middle, 25%); }
+}
+  .inverse .frame {
+    background: $foreground;
+
+    a:hover { color: darken($middle, 25%); }
+  }
 
 .inner-frame { background: $foreground; }
   .inverse .inner-frame { background: $background; }
